@@ -13,7 +13,7 @@ const SecondaryNav: React.FC<SecondaryNavProps> = ({ selectedLocation, setSelect
   const formattedDate = today.toLocaleDateString();
 
   return (
-    <nav className="secondary-nav w-full p-4 bg-white">
+    <nav className="secondary-nav w-full p-4">
       <div className="secondary-nav-content flex items-center justify-between w-full">
         <div className="flex items-center">
           <label htmlFor="store-location-select" className="mr-2">Store Location:</label>
