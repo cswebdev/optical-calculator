@@ -64,7 +64,7 @@ const MainTable: React.FC = () => {
                                 </td>
                                 <td className="p-3">
                                     <input
-                                        className="w-full bg-white0 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        className="w-full bg-white rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
                                         value={row.copay}
                                         onChange={e => handleInputChange(idx, 'copay', e.target.value)}
                                         placeholder="Co-Pay"
@@ -83,14 +83,42 @@ const MainTable: React.FC = () => {
                                 </td>
                             </tr>
                         ))}
+                        <tr>
+                            <td colSpan={4} className="py-2 text-center">
+                                <button
+                                    className="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 mx-auto"
+                                    onClick={addRow}
+                                >
+                                    <FaPlus /> Add Row
+                                </button>
+                            </td>
+                        </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="p-3 text-right">Total</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3"></td>
+                        </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="p-3 text-right">Discount (Insurance Coverage)</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3"></td>
+                        </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="p-3 text-right">Tax</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3"></td>
+                        </tr>
+                        <tr className="bg-gray-200 font-bold">
+                            <td className="p-3 text-right">Total with Tax</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3"></td>
+                        </tr>
                     </tbody>
                 </table>
-                <button
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2"
-                    onClick={addRow}
-                >
-                    <FaPlus /> Add Row
-                </button>
             </div>
     );
 };
