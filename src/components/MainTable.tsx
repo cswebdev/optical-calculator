@@ -72,7 +72,7 @@ const MainTable: React.FC = () => {
                                 </td>
                                 <td className="text-left p-2" id='deleteTd'>
                                     <button
-                                        className="bg-red-100 p-1 rounded-sm text-red-500 hover:text-red-700  hover:bg-red-200 transition"
+                                        className="bg-red-100 p-1 rounded-sm text-red-500 hover:text-red-700 hover:bg-red-200 transition"
                                         onClick={() => {
                                             setRows(rows.filter((_, i) => i !== idx));
                                         }}
@@ -84,37 +84,40 @@ const MainTable: React.FC = () => {
                             </tr>
                         ))}
                         <tr>
-                            <td colSpan={4} className="py-2 text-center">
+                            <td className="py-2"></td>
+                            <td className="py-2"></td>
+                            <td className="py-2"></td>
+                            <td className="text-left p-2">
                                 <button
-                                    className="px-4 py-2 bg-blue-500 text-white rounded flex items-center gap-2 mx-auto"
+                                    className="p-1 bg-blue-500 text-white rounded flex items-center gap-2"
                                     onClick={addRow}
                                 >
-                                    <FaPlus /> Add Row
+                                    <FaPlus /> 
                                 </button>
                             </td>
                         </tr>
                         <tr className="bg-gray-100 font-semibold">
                             <td className="p-3 text-right">Total</td>
-                            <td className="p-3 text-left">$0.00</td>
-                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
                             <td className="p-3"></td>
                         </tr>
                         <tr className="bg-gray-100 font-semibold">
                             <td className="p-3 text-right">Discount (Insurance Coverage)</td>
-                            <td className="p-3 text-left">$0.00</td>
-                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
                             <td className="p-3"></td>
                         </tr>
                         <tr className="bg-gray-100 font-semibold">
                             <td className="p-3 text-right">Tax</td>
-                            <td className="p-3 text-left">$0.00</td>
-                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
                             <td className="p-3"></td>
                         </tr>
                         <tr className="bg-gray-200 font-bold">
                             <td className="p-3 text-right">Total with Tax</td>
-                            <td className="p-3 text-left">$0.00</td>
-                            <td className="p-3 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
+                            <td className="p-3 px-4 text-left">$0.00</td>
                             <td className="p-3"></td>
                         </tr>
                     </tbody>
