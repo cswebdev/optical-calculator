@@ -6,10 +6,10 @@ const TopNav: React.FC = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-4">
                     <img src={logo} alt="Logo" className="h-[47px] w-[250px]" />
-                    <span className="text-[#001231] font-bold text-xl">Optical Quote Sheet</span>
+                    <span className="text-[#001231] font-bold text-xl">| Optical Quote Sheet</span>
                 </div>
                 <div>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition print:hidden" onClick={() => window.print()}>
                         Print
                     </button>
                 </div>
