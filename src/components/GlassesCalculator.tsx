@@ -1,15 +1,21 @@
-
-
-import React, { useState } from 'react';
+import React from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 
 
-type TableRow = {
-    item: string;
-    retail: string;
-    copay: string;
-};
+interface TableRow {
+  item: string;
+  retail: string;
+  copay: string;
+}
+
+interface MainTableProps {
+  rows: TableRow[];
+  setRows: React.Dispatch<React.SetStateAction<TableRow[]>>;
+  materialCopay: string;
+  setMaterialCopay: React.Dispatch<React.SetStateAction<string>>;
+  taxRate: number;
+}
 
 const initialRows: TableRow[] = [
     { item: 'Frame', retail: '', copay: '' },
@@ -19,14 +25,14 @@ const initialRows: TableRow[] = [
     { item: 'Transitions', retail: '', copay: '' },
 ];
 
-interface MainTableProps {
-    taxRate: number;
-}
-
-const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
-    const [rows, setRows] = useState<TableRow[]>(initialRows);
-    const [materialCopay, setMaterialCopay] = useState('');
-
+const GlassesCalculator: React.FC<MainTableProps> = ({
+  rows,
+  setRows,
+  materialCopay,
+  setMaterialCopay,
+  taxRate
+}) => {
+    // Controlled handlers
     const handleInputChange = (index: number, field: keyof TableRow, value: string) => {
         const updatedRows = [...rows];
         updatedRows[index][field] = value;
@@ -37,17 +43,17 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
         setRows([...rows, { item: '', retail: '', copay: '' }]);
     };
 
+    const removeRow = (idx: number) => {
+        setRows(rows.filter((_, i) => i !== idx));
+    };
+
     // Calculation logic
     const totalRetail = rows.reduce((sum, row) => sum + Number(row.retail || 0), 0);
-    // Material co-pay is not taxable, so exclude from tax calculations
     const materialCopayValue = Number(materialCopay || 0);
     const totalCopay = rows.reduce((sum, row) => sum + Number(row.copay || 0), 0) + materialCopayValue;
-    // Discount is retail price total minus copay total
     const discount = totalRetail - totalCopay;
-    // Tax is based on retail price only; insurance does not cover tax, and material copay is not taxable
     const taxRetail = totalRetail * taxRate;
     const taxCopay = taxRetail;
-    // Total with tax for each column
     const totalWithTaxRetail = totalRetail + taxRetail;
     const totalWithTaxCopay = totalCopay + taxCopay;
 
@@ -114,9 +120,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
                                 <td className="text-left px-3 py-1" id='deleteTd'>
                                     <button
                                         className="bg-red-100 p-1 rounded-sm text-red-500 hover:text-red-700 hover:bg-red-200 transition print:hidden"
-                                        onClick={() => {
-                                            setRows(rows.filter((_, i) => i !== idx));
-                                        }}
+                                        onClick={() => removeRow(idx)}
                                         aria-label="Delete Row"
                                     >
                                         <FaTrash />
@@ -138,30 +142,30 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
                                 </button>
                             </td>
                         </tr>
-                                    <tr className="bg-gray-100 font-semibold">
-                                        <td className="px-3 py-1 text-right">Total</td>
-                                        <td className="px-3 py-1 text-left">${totalRetail.toFixed(2)}</td>
-                                        <td className="px-3 py-1 text-left">${totalCopay.toFixed(2)}</td>
-                                        <td className="px-3 py-1"></td>
-                                    </tr>
-                                    <tr className="bg-gray-100 font-semibold">
-                                        <td className="px-3 py-1 text-right">Discount (Insurance Coverage)</td>
-                                        <td className="px-3 py-1 text-left">${discount.toFixed(2)}</td>
-                                        <td className="px-3 py-1 text-left">${discount.toFixed(2)}</td>
-                                        <td className="px-3 py-1"></td>
-                                    </tr>
-                                    <tr className="bg-gray-100 font-semibold">
-                                        <td className="px-3 py-1 text-right">Tax</td>
-                                        <td className="px-3 py-1 text-left">${taxRetail.toFixed(2)}</td>
-                                        <td className="px-3 py-1 text-left">${taxCopay.toFixed(2)}</td>
-                                        <td className="px-3 py-1"></td>
-                                    </tr>
-                                    <tr className="bg-gray-200 font-bold">
-                                        <td className="px-3 py-1 text-right">Total with Tax</td>
-                                        <td className="px-3 py-1 text-left">${totalWithTaxRetail.toFixed(2)}</td>
-                                        <td className="px-3 py-1 text-left">${totalWithTaxCopay.toFixed(2)}</td>
-                                        <td className="px-3 py-1"></td>
-                                    </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="px-3 py-1 text-right">Total</td>
+                            <td className="px-3 py-1 text-left">${totalRetail.toFixed(2)}</td>
+                            <td className="px-3 py-1 text-left">${totalCopay.toFixed(2)}</td>
+                            <td className="px-3 py-1"></td>
+                        </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="px-3 py-1 text-right">Discount (Insurance Coverage)</td>
+                            <td className="px-3 py-1 text-left">${discount.toFixed(2)}</td>
+                            <td className="px-3 py-1 text-left">${discount.toFixed(2)}</td>
+                            <td className="px-3 py-1"></td>
+                        </tr>
+                        <tr className="bg-gray-100 font-semibold">
+                            <td className="px-3 py-1 text-right">Tax</td>
+                            <td className="px-3 py-1 text-left">${taxRetail.toFixed(2)}</td>
+                            <td className="px-3 py-1 text-left">${taxCopay.toFixed(2)}</td>
+                            <td className="px-3 py-1"></td>
+                        </tr>
+                        <tr className="bg-gray-200 font-bold">
+                            <td className="px-3 py-1 text-right">Total with Tax</td>
+                            <td className="px-3 py-1 text-left">${totalWithTaxRetail.toFixed(2)}</td>
+                            <td className="px-3 py-1 text-left">${totalWithTaxCopay.toFixed(2)}</td>
+                            <td className="px-3 py-1"></td>
+                        </tr>
                     </tbody>
                 </table>
                 <div className='mt-4'>

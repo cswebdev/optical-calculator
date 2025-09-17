@@ -22,7 +22,9 @@ const SecondaryNav: React.FC<SecondaryNavProps> = ({ selectedLocation, setSelect
             className="store-location-input px-2 py-1 rounded border border-gray-300"
             value={selectedLocation}
             onChange={e => setSelectedLocation(e.target.value)}
+          
           >
+            <option value="">Select a store</option>
             {storeLocations.map((location) => (
               <option key={location.name} value={location.name}>
                 {location.name}

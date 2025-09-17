@@ -1,6 +1,39 @@
+/* Ensure hidden printable content is styled and sized for PDF generation */
+.print-preview {
+  width: 500px;         /* or 500px for even smaller */
+  min-height: 800px;
+  margin: 0 auto;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-preview, .print-preview * {
+    visibility: visible;
+  }
+  .print-preview {
+    position: static;
+    width: auto;
+    min-height: auto;
+    z-index: auto;
+    margin: 0;
+    padding: 0;
+  }
+  #root {
+    max-width: none;
+    margin: 0;
+    text-align: left;
+  }
+}
