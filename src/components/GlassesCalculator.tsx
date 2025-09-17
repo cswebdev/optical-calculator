@@ -13,7 +13,7 @@ type TableRow = {
 
 const initialRows: TableRow[] = [
     { item: 'Frame', retail: '', copay: '' },
-    { item: 'Lense Type', retail: '', copay: '' },
+    { item: 'Lens Type', retail: '', copay: '' },
     { item: 'Lens Material', retail: '', copay: '' },
     { item: 'Anti-Reflective', retail: '', copay: '' },
     { item: 'Transitions', retail: '', copay: '' },
@@ -25,6 +25,7 @@ interface MainTableProps {
 
 const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
     const [rows, setRows] = useState<TableRow[]>(initialRows);
+    const [materialCopay, setMaterialCopay] = useState('');
 
     const handleInputChange = (index: number, field: keyof TableRow, value: string) => {
         const updatedRows = [...rows];
@@ -36,17 +37,19 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
         setRows([...rows, { item: '', retail: '', copay: '' }]);
     };
 
-            // Calculation logic
-            const totalRetail = rows.reduce((sum, row) => sum + Number(row.retail || 0), 0);
-            const totalCopay = rows.reduce((sum, row) => sum + Number(row.copay || 0), 0);
-            // Discount is retail price total minus copay total
-            const discount = totalRetail - totalCopay;
-                // Tax is based on retail price only; insurance does not cover tax
-                const taxRetail = totalRetail * taxRate;
-                const taxCopay = taxRetail;
-                // Total with tax for each column
-                const totalWithTaxRetail = totalRetail + taxRetail;
-                const totalWithTaxCopay = totalCopay + taxCopay;
+    // Calculation logic
+    const totalRetail = rows.reduce((sum, row) => sum + Number(row.retail || 0), 0);
+    // Material co-pay is not taxable, so exclude from tax calculations
+    const materialCopayValue = Number(materialCopay || 0);
+    const totalCopay = rows.reduce((sum, row) => sum + Number(row.copay || 0), 0) + materialCopayValue;
+    // Discount is retail price total minus copay total
+    const discount = totalRetail - totalCopay;
+    // Tax is based on retail price only; insurance does not cover tax, and material copay is not taxable
+    const taxRetail = totalRetail * taxRate;
+    const taxCopay = taxRetail;
+    // Total with tax for each column
+    const totalWithTaxRetail = totalRetail + taxRetail;
+    const totalWithTaxCopay = totalCopay + taxCopay;
 
     return (
             <div className="p-4 justify-center flex flex-col items-center">
@@ -60,6 +63,28 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
                         </tr>
                     </thead>
                     <tbody>
+                         {/* Static Material Co-Pay row */}
+                        <tr className="bg-stone-100">
+                            <td className="px-5 py-1 font-normal text-left">Material Co-Pay</td>
+                            <td className="px-3 py-1">
+                                <input
+                                    className="w-full bg-gray-200 rounded-md px-2 py-1 cursor-not-allowed"
+                                    value={''}
+                                    disabled
+                                    placeholder="N/A"
+                                />
+                            </td>
+                            <td className="px-3 py-1">
+                                <input
+                                    className="w-full bg-white rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    value={materialCopay}
+                                    onChange={e => setMaterialCopay(e.target.value)}
+                                    placeholder="Material Co-Pay"
+                                />
+                            </td>
+                            <td className="px-3 py-1"></td>
+                        </tr>
+                        {/* Dynamic rows */}
                         {rows.map((row, idx) => (
                             <tr key={idx} className="bg-stone-50 transition">
                                 <td className="px-3 py-1">
@@ -99,6 +124,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({ taxRate }) => {
                                 </td>
                             </tr>
                         ))}
+                       
                         <tr>
                             <td className="px-3 py-1"></td>
                             <td className="px-3 py-1"></td>
