@@ -4,6 +4,7 @@ import './App.css';
 import Sidebar from './components/navigation/Sidebar';
 import HomePage from './pages/HomePage';
 import CalculatorPage from './pages/CalculatorPage';
+import RecheckPage from './pages/RecheckPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/calculator" element={<CalculatorPage />} />
+        <Route path="/recheck" element={<RecheckPage />} />
       </Routes>
     </Router>
   );

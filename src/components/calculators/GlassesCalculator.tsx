@@ -78,7 +78,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({
                             <TableCell className="px-3 py-1">
                                 <Input
                                     className="w-full bg-gray-200 rounded-md px-2 py-1 cursor-not-allowed"
-                                    value={''}
+                                    type={''}
                                     disabled
                                     placeholder="N/A"
                                 />
@@ -86,7 +86,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({
                             <TableCell className="px-3 py-1">
                                 <Input
                                     className="w-full bg-white rounded-md px-2 py-1"
-                                    value={materialCopay}
+                                    type={materialCopay}
                                     onChange={e => setMaterialCopay(e.target.value)}
                                     placeholder="Material Co-Pay"
                                 />
@@ -99,7 +99,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({
                                 <TableCell className="px-3 py-1">
                                     <Input
                                         className="w-full bg-white rounded-md px-2 py-1"
-                                        value={row.item}
+                                        type={row.item}
                                         onChange={e => handleInputChange(idx, 'item', e.target.value)}
                                         placeholder="Item/Option"
                                     />
@@ -107,7 +107,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({
                                 <TableCell className="px-3 py-1">
                                     <Input
                                         className="w-full bg-white rounded-md px-2 py-1"
-                                        value={row.retail}
+                                        type={row.retail}
                                         onChange={e => handleInputChange(idx, 'retail', e.target.value)}
                                         placeholder="Retail Price"
                                     />
@@ -115,7 +115,7 @@ const GlassesCalculator: React.FC<MainTableProps> = ({
                                 <TableCell className="px-3 py-1">
                                     <Input
                                         className="w-full bg-white rounded-md px-2 py-1"
-                                        value={row.copay}
+                                        type={row.copay}
                                         onChange={e => handleInputChange(idx, 'copay', e.target.value)}
                                         placeholder="Co-Pay"
                                     />

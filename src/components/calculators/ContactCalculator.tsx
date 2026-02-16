@@ -51,7 +51,7 @@ const ContactCalculator: React.FC = () => {
                 <TableHead key={col.id}>
                   <input
                     className="bg-transparent border-b border-gray-300 w-full text-center font-semibold"
-                    value={headerEdits[col.id] ?? col.name}
+                    type={headerEdits[col.id] ?? col.name}
                     onChange={e => handleHeaderChange(col.id, e.target.value)}
                   />
                 </TableHead>
