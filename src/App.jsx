@@ -7,8 +7,10 @@ import CalculatorPage from './pages/CalculatorPage';
 import RecheckPage from './pages/RecheckPage';
 
 function App() {
+  const basename = import.meta.env.PROD ? '/optical-calculator' : '/';
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Sidebar />
       <Routes>
         <Route path="/" element={<HomePage />} />
