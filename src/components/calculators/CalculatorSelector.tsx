@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { EyeIcon } from "lucide-react";
 import { GlassesIcon } from "lucide-react";
 import { CalculatorIcon } from "lucide-react";

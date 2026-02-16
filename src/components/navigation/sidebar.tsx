@@ -1,7 +1,8 @@
 import React from 'react';
-import { Sheet, SheetTrigger, SheetContent } from "./components/ui/sheet";
-import { Button } from "./components/ui/button";
-import { GlassesIcon } from 'lucide-react';
+import { Sheet, SheetTrigger, SheetContent } from "../components/ui/sheet";
+import { Button } from "../components/ui/button";
+import { GlassesIcon, ClipboardListIcon } from 'lucide-react';
+
 
 const Sidebar: React.FC = () => {
 	return (
@@ -17,6 +18,10 @@ const Sidebar: React.FC = () => {
 					<a href="#" className="block py-2 px-4 rounded hover:bg-slate-700 transition w-full">
 						<GlassesIcon className="inline-block mr-2" />
 						Calculator
+					</a>
+					<a href="#" className="block py-2 px-4 rounded hover:bg-slate-700 transition w-full">
+						<ClipboardListIcon className="inline-block mr-2" />
+						Recheck Form
 					</a>
 				</div>
 			</SheetContent>

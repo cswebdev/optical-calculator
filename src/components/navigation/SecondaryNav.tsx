@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {storeLocations} from '../data/LocationData';
+import {storeLocations} from '../../data/LocationData';
 
 
 interface SecondaryNavProps {

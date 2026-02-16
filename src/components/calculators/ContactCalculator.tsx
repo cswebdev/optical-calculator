@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Card, CardHeader, CardContent } from "./components/ui/card";
-import { Label } from "./components/ui/label";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "./components/ui/table";
-import { Button } from "./components/ui/button";
+import { Card, CardHeader, CardContent } from "../components/ui/card";
+import { Label } from "../components/ui/label";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "../components/ui/table";
+import { Button } from "../components/ui/button";
 
 const defaultColumns = [
   { id: 1, name: "6 Month Supply" },

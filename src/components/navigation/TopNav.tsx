@@ -1,4 +1,4 @@
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 
 const TopNav: React.FC<{ onPrint: () => void }> = ({ onPrint }) => (
     <nav className="bg-slate-100 min-w-full p-4 rounded-sm ">

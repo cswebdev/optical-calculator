@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from "./components/ui/table";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from "../components/ui/table";
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 
