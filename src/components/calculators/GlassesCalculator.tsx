@@ -5,11 +5,13 @@ import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from ".
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 
-
 interface TableRow {
   item: string;
   retail: string;
   copay: string;
+  frameRetailPrice?: string;
+  frameCoverageAmount?: string;
+  frameCoveragePercentage?: string;
 }
 
 interface MainTableProps {
@@ -20,6 +22,15 @@ interface MainTableProps {
   taxRate: number;
 }
 
+
+// some insurances covers a flat frame coverage amount for the frame + an additional % of the remaining balance
+// Need to create a method to calculates the cost of the frame
+// Example: Frame is $225 retail. Insurance covers a flat amount of $150 for the frame + 15% of the remaining balance. 
+// Flat coverage amount can differ depenging on plan, percentage can differ depending on plan.
+// design wise, need to either alter the table to input a row that allows frame coverage amount and percentage, or create a separate section for insurance coverage details that then feeds into the calculation.
+// or, design wise, create a row above the table that allows the frame coverage information
+
+
 const initialRows: TableRow[] = [
     { item: 'Frame', retail: '', copay: '' },
     { item: 'Lens Type', retail: '', copay: '' },
@@ -27,6 +38,13 @@ const initialRows: TableRow[] = [
     { item: 'Anti-Reflective', retail: '', copay: '' },
     { item: 'Transitions', retail: '', copay: '' },
 ];
+
+const frameCoverageCalulation = (frameRetailPrice: Number, frameCoverageAmount: Number, frameCoveragePercentage: Number) => {
+    const remainingBalance = Number(frameRetailPrice)- Number(frameCoverageAmount);
+    const percentageCoverage = remainingBalance * (Number(frameCoveragePercentage) / 100);
+    const totalFrameCoverage = Number(frameCoverageAmount) + percentageCoverage;
+    return totalFrameCoverage;
+}
 
 const GlassesCalculator: React.FC<MainTableProps> = ({
   rows,
