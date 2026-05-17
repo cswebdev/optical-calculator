@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
                     <a href="mailto:cswebdev91@gmail.com" className="text-blue-600 hover:text-blue-800 underline">
                     cswebdev91@gmail.com
                     </a>
-                </p>
+                </p>    
                 <p className='text-sm text-slate-500 mt-4 max-w-2xl mx-auto'>&copy; {new Date().getFullYear()} Optician's Toolkit. All rights reserved.</p>
             </div>
         </footer>
